@@ -7,7 +7,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import toast, { Toaster } from "react-hot-toast";
 const SigninForm = () => {
   const [values, setValues] = useState({
-    email: "rahul@gmail.com",
+    email: "jerry@gmail.com",
     password: "123456",
   });
   const [isLoading, setIsLoading] = useState(false);

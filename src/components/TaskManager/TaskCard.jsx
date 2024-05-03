@@ -1,13 +1,23 @@
 import React from "react";
 
-const TaskCard = () => {
+const TaskCard = ({ text, deleteTask, checked, onChange }) => {
   return (
     <div className="w-full flex flex-row justify-between bg-gray-100 rounded-lg p-3">
       <div className="flex flex-row gap-2">
-        <input type="checkbox" className="h-5 w-5 mt-1" />
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={onChange}
+          className="h-5 w-5 mt-1"
+        />
 
         <div className="flex flex-col">
-          <h3 className="font-[500] text-[16px] text-primary-500">Task one</h3>
+          <h3
+            style={{ textDecoration: checked ? "line-through" : "none" }}
+            className="font-[500] text-[16px] text-primary-500 first-letter:capitalize"
+          >
+            {text}
+          </h3>
           <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
             Completed
           </span>
@@ -30,7 +40,10 @@ const TaskCard = () => {
             <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
           </svg>
         </button>
-        <button className="text-xl p-2 text-primary-500 hover:bg-gray-200 transition-all duration-200 rounded-md">
+        <button
+          onClick={deleteTask}
+          className="text-xl p-2 text-primary-500 hover:bg-gray-200 transition-all duration-200 rounded-md"
+        >
           <svg
             stroke="currentColor"
             fill="currentColor"

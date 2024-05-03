@@ -4,8 +4,8 @@ import NavBar from "../Header/NavBar";
 
 const Applayout = ({ children }) => {
   return (
-    <div className="w-full">
-      {/* <NavBar /> */}
+    <div className="w-full relative">
+      <NavBar />
       {children}
       {/* <Footer /> */}
     </div>
