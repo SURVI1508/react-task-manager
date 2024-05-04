@@ -30,6 +30,7 @@ export const AuthProvider = ({ children }) => {
       }
       setUser(user);
       setIsLoading(false);
+      navigate("/");
     });
     return () => {};
   }, []);
