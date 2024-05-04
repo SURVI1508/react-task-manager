@@ -4,13 +4,13 @@ TaskMate is a simple and intuitive task management app built with React. It allo
 
 ## Features
 
-Task CRUD Operations: Users can easily add, edit, and delete tasks.
-Task Completion: Tasks can be marked as completed or incomplete.
-Task Filtering: Users can filter tasks based on their completion status (All, Completed, Incomplete).
-Data Persistence: Tasks are stored locally using localStorage, ensuring data persistence across sessions.
-Firebase Authentication: TaskMate provides secure authentication using Firebase Authentication.
-Sign In: Users can sign in using their email and password.
-Sign Up: New users can register with their name, email, and password.
+1.Task CRUD Operations: Users can easily add, edit, and delete tasks.
+2.Task Completion: Tasks can be marked as completed or incomplete.
+3.Task Filtering: Users can filter tasks based on their completion status (All, Completed, Incomplete).
+4.Data Persistence: Tasks are stored locally using localStorage, ensuring data persistence across sessions.
+5.Firebase Authentication: TaskMate provides secure authentication using Firebase Authentication.
+6.Sign In: Users can sign in using their email and password.
+7.Sign Up: New users can register with their name, email, and password.
 
 ## Usage
 
