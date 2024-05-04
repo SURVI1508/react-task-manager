@@ -6,6 +6,7 @@ export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const auth = getAuth();
 
   const navigate = useNavigate();
@@ -18,18 +19,22 @@ export const AuthProvider = ({ children }) => {
         console.error("Sign-out error", error);
       });
   };
+
+  // getting logged in user
   useEffect(() => {
+    setIsLoading(true);
     auth.onAuthStateChanged((user) => {
       if (!user) {
         navigate("/auth/sign-in");
         return;
       }
       setUser(user);
+      setIsLoading(false);
     });
     return () => {};
   }, []);
   return (
-    <AuthContext.Provider value={{ user, handleSignOut }}>
+    <AuthContext.Provider value={{ user, handleSignOut, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

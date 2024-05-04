@@ -1,5 +1,3 @@
-import React from "react";
-
 const TaskCard = ({ text, deleteTask, checked, onChange, editTask }) => {
   return (
     <div className="w-full flex flex-row justify-between bg-gray-100 rounded-lg p-3">
@@ -39,6 +37,7 @@ const TaskCard = ({ text, deleteTask, checked, onChange, editTask }) => {
 
       {/* action buttons  */}
       <div className="flex flex-row items-center gap-1">
+        {/* edit  */}
         <button
           onClick={editTask}
           className="text-xl p-2 text-primary-500 hover:bg-gray-200 transition-all duration-200 rounded-md"
@@ -55,6 +54,8 @@ const TaskCard = ({ text, deleteTask, checked, onChange, editTask }) => {
             <path fill="none" d="M0 0h24v24H0z"></path>
             <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
           </svg>
+
+          {/* delete  */}
         </button>
         <button
           onClick={deleteTask}

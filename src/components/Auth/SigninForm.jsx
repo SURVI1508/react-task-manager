@@ -7,11 +7,13 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import toast, { Toaster } from "react-hot-toast";
 const SigninForm = () => {
   const [values, setValues] = useState({
-    email: "jerry@gmail.com",
-    password: "123456",
+    email: "",
+    password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  // function : to login user with email and password (!firebase)
   const handleSubmission = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -56,7 +58,7 @@ const SigninForm = () => {
                 value={values?.email}
               />
               <InputControl
-                type="password"
+                type="text"
                 required
                 label="Password"
                 placeholder="1626***3"
@@ -65,11 +67,15 @@ const SigninForm = () => {
                 value={values?.password}
               />
 
-              <Button customClass="w-full" disabled={isLoading}>
+              <Button
+                isLoading={isLoading}
+                customClass="w-full"
+                disabled={isLoading}
+              >
                 Sign in
               </Button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Dont have an account yet?{" "}
+                Don&#x27;t have an account yet?{" "}
                 <Link
                   to="/auth/sign-up"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"

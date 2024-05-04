@@ -1,39 +1,28 @@
-import React, { useEffect, useState } from "react";
-import Button from "../common/Button";
+import { useState } from "react";
 import TaskCard from "./TaskCard";
 import Applayout from "../Layout/Applayout";
-import { useAuth } from "../../context/authContext";
 import { useTaskContext } from "../../context/taskContext";
 import AddTaskForm from "./AddTaskForm";
 import UpdateTaskModal from "./UpdateTaskModal";
-import { motion, AnimatePresence } from "framer-motion";
 
 const TaskManager = () => {
   const [editingTask, setEditingTask] = useState(null);
-  const {
-    tasks,
-    addTask,
-    editTask,
-    deleteTask,
-    toggleTaskCompletion,
-    changeFilter,
-  } = useTaskContext();
+  const { filter, tasks, deleteTask, toggleTaskCompletion, changeFilter } =
+    useTaskContext();
 
   const handleEditTask = (task) => {
     setEditingTask(task);
   };
 
-  const handleCloseModal = () => {
-    setEditingTask(null);
-  };
   return (
     <Applayout>
-      <div className="w-full min-h-screen flex flex-col gap-3 items-center justify-center">
-        <div className="w-full sm:w-[90%] lg:w-[60%] xl:w-[50%] mx-auto sm:shadow-md p-5 sm:rounded-xl sm:border flex flex-col gap-3">
+      <div className="w-full min-h-screen flex flex-col gap-3 mt-5">
+        <div className="w-full sm:w-[90%] lg:w-[60%] xl:w-[50%] mx-auto sm:shadow-md sm:p-5 sm:rounded-xl sm:border flex flex-col gap-3">
           {/* filter / add task form  */}
-          <div className="w-full flex flex-col  sm:flex-row sm:items-end justify-between mt-[25%] sm:mt-0 ">
+          <div className="w-full flex flex-col  sm:flex-row sm:items-end justify-between ">
             {/* filter  */}
             <select
+              value={filter}
               onChange={(e) => changeFilter(e.target.value)}
               class="h-[40px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-[4px] outline-none focus:ring-blue-500 focus:border-blue-500 block  p-2.5   "
             >
@@ -47,7 +36,7 @@ const TaskManager = () => {
             <AddTaskForm />
           </div>
           {/* task list  */}
-          <div className="w-full flex flex-col gap-2 sm:max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar">
+          <div className="w-full flex flex-col gap-2 sm:max-h-[55vh] overflow-y-auto pr-2 custom-scrollbar">
             {[...tasks].reverse().map((task) => {
               const { id, text, completed } = task;
               return (
@@ -62,6 +51,8 @@ const TaskManager = () => {
                 </div>
               );
             })}
+
+            {/* if no task  */}
             {tasks?.length < 1 && (
               <div className=" py-8 w-full h-full flex flex-col text-center gap-2 items-center justify-center">
                 <div className="p-10 bg-red-50 rounded-full text-[2.5rem] text-red-400 ">
@@ -89,8 +80,12 @@ const TaskManager = () => {
           </div>
         </div>
 
+        {/* update modal  */}
         {editingTask && (
-          <UpdateTaskModal task={editingTask} onClose={handleCloseModal} />
+          <UpdateTaskModal
+            task={editingTask}
+            onClose={() => setEditingTask(null)}
+          />
         )}
       </div>
     </Applayout>

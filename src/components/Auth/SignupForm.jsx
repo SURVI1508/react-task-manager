@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import InputControl from "../common/InputControl";
 import Button from "../common/Button";
 import toast, { Toaster } from "react-hot-toast";
 import { auth } from "../../firebase";
+import { useTaskContext } from "../../context/taskContext";
 
 const SignupForm = () => {
   const [values, setValues] = useState({
     name: "",
-    email: "rahul@gmail.com",
-    password: "123456",
+    email: "",
+    password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const { setTasks } = useTaskContext();
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
 
+  // signup user (firebase)
   const handleSubmission = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -29,6 +32,8 @@ const SignupForm = () => {
         await updateProfile(user, {
           displayName: values?.name,
         });
+        localStorage.removeItem("tasks");
+        setTasks([]);
         navigate("/");
       })
       .catch((err) => {
@@ -49,7 +54,6 @@ const SignupForm = () => {
             <form
               onSubmit={handleSubmission}
               className="space-y-4 md:space-y-6"
-              action="#"
             >
               <InputControl
                 type="text"
@@ -70,7 +74,7 @@ const SignupForm = () => {
                 onChange={handleChange}
               />
               <InputControl
-                type="password"
+                type="text"
                 required
                 label="Password"
                 placeholder="1626***3"
@@ -79,7 +83,12 @@ const SignupForm = () => {
                 onChange={handleChange}
               />
 
-              <Button disabled={isLoading} type="submit" customClass="w-full">
+              <Button
+                isLoading={isLoading}
+                customClass="w-full"
+                disabled={isLoading}
+                type="submit"
+              >
                 Sign up
               </Button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">

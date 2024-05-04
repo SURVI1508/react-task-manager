@@ -5,9 +5,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
-  font-family: "Poppins", sans-serif !important;
+  font-family: "Montserrat", sans-serif;
 }
+
 .custom-scrollbar::-webkit-scrollbar {
   background-color: #fff;
   width: 5px;

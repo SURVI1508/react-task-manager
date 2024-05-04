@@ -6,6 +6,7 @@ import { useTaskContext } from "../../context/taskContext";
 const AddTask = () => {
   const [newTaskText, setNewTaskText] = useState("");
   const { addTask } = useTaskContext();
+
   const handleAddTask = (e) => {
     e.preventDefault();
     if (newTaskText.trim() !== "") {
@@ -19,6 +20,7 @@ const AddTask = () => {
       className="flex flex-col sm:flex-row items-end gap-2"
     >
       <InputControl
+        required
         type="text"
         placeholder="Enter task"
         value={newTaskText}

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const TaskContext = createContext();
 
@@ -6,8 +6,8 @@ export const useTaskContext = () => useContext(TaskContext);
 
 export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
-  const [isModal, setIsModal] = useState(false);
   const [filter, setFilter] = useState("All");
+  const storedTasks = JSON.parse(localStorage.getItem("tasks"));
 
   const changeFilter = (newFilter) => {
     setFilter(newFilter);
@@ -29,12 +29,14 @@ export const TaskProvider = ({ children }) => {
     const updatedTasks = tasks.filter((task) => task.id !== taskId);
     setTasks(updatedTasks);
   };
+
   const toggleTaskCompletion = (taskId) => {
     const updatedTasks = tasks.map((task) =>
       task.id === taskId ? { ...task, completed: !task.completed } : task
     );
     setTasks(updatedTasks);
   };
+
   const filteredTasks = tasks.filter((task) => {
     if (filter === "All") return true;
     if (filter === "Completed") return task.completed;
@@ -42,13 +44,14 @@ export const TaskProvider = ({ children }) => {
     return true;
   });
 
-  const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+  // retrieving data from localStorage
   useEffect(() => {
     if (storedTasks) {
       setTasks(storedTasks);
     }
   }, []);
 
+  // Setting tasks in localStorage when change task state
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
@@ -59,11 +62,11 @@ export const TaskProvider = ({ children }) => {
         addTask,
         editTask,
         deleteTask,
-        isModal,
-        setIsModal,
         toggleTaskCompletion,
         filteredTasks,
         changeFilter,
+        filter,
+        setTasks,
       }}
     >
       {children}

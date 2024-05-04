@@ -1,11 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SigninForm from "./components/Auth/SigninForm";
 import SignupForm from "./components/Auth/SignupForm";
-import HomePage from "./components/Home";
-import Applayout from "./components/Layout/Applayout";
 import TaskManager from "./components/TaskManager";
 import { AuthProvider } from "./context/authContext";
 import { TaskProvider } from "./context/taskContext";
+
 function App() {
   return (
     <div className="App">
