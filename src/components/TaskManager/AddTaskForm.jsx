@@ -14,14 +14,20 @@ const AddTask = () => {
     }
   };
   return (
-    <form onSubmit={handleAddTask} className="flex flex-row items-end gap-2">
+    <form
+      onSubmit={handleAddTask}
+      className="flex flex-col sm:flex-row items-end gap-2"
+    >
       <InputControl
         type="text"
         placeholder="Enter task"
         value={newTaskText}
         onChange={(e) => setNewTaskText(e.target.value)}
       />
-      <Button type="submit">Add task</Button>
+
+      <Button customClass="w-full sm:w-auto" type="submit">
+        Add task
+      </Button>
     </form>
   );
 };

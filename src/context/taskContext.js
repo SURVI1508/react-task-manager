@@ -8,8 +8,14 @@ export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [isModal, setIsModal] = useState(false);
   const [filter, setFilter] = useState("All");
+
+  const changeFilter = (newFilter) => {
+    setFilter(newFilter);
+  };
+
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
+    changeFilter("All");
   };
 
   const editTask = (taskId, updatedTask) => {
@@ -36,9 +42,6 @@ export const TaskProvider = ({ children }) => {
     return true;
   });
 
-  const changeFilter = (newFilter) => {
-    setFilter(newFilter);
-  };
   const storedTasks = JSON.parse(localStorage.getItem("tasks"));
   useEffect(() => {
     if (storedTasks) {

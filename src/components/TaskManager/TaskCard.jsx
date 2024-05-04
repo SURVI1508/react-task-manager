@@ -1,32 +1,48 @@
 import React from "react";
 
-const TaskCard = ({ text, deleteTask, checked, onChange }) => {
+const TaskCard = ({ text, deleteTask, checked, onChange, editTask }) => {
   return (
     <div className="w-full flex flex-row justify-between bg-gray-100 rounded-lg p-3">
-      <div className="flex flex-row gap-2">
-        <input
-          type="checkbox"
-          checked={checked}
-          onChange={onChange}
-          className="h-5 w-5 mt-1"
-        />
-
+      <div className="flex flex-row items-center gap-2">
+        {/* mark as completed   */}
+        <button
+          onClick={onChange}
+          className={`${
+            checked
+              ? "border-primary-500 bg-primary-500 text-white"
+              : "border-primary-500 text-white bg-white"
+          } border h-[18px] w-[18px] rounded-[3px] flex items-center justify-center transition-all duration-150`}
+        >
+          <span className="text-xl">
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              strokeWidth="0"
+              viewBox="0 0 512 512"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M362.6 192.9L345 174.8c-.7-.8-1.8-1.2-2.8-1.2-1.1 0-2.1.4-2.8 1.2l-122 122.9-44.4-44.4c-.8-.8-1.8-1.2-2.8-1.2-1 0-2 .4-2.8 1.2l-17.8 17.8c-1.6 1.6-1.6 4.1 0 5.7l56 56c3.6 3.6 8 5.7 11.7 5.7 5.3 0 9.9-3.9 11.6-5.5h.1l133.7-134.4c1.4-1.7 1.4-4.2-.1-5.7z"></path>
+            </svg>
+          </span>
+        </button>
         <div className="flex flex-col">
           <h3
             style={{ textDecoration: checked ? "line-through" : "none" }}
-            className="font-[500] text-[16px] text-primary-500 first-letter:capitalize"
+            className="font-[500] text-[16px] text-primary-500 first-letter:capitalize "
           >
             {text}
           </h3>
-          <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
-            Completed
-          </span>
         </div>
       </div>
 
       {/* action buttons  */}
       <div className="flex flex-row items-center gap-1">
-        <button className="text-xl p-2 text-primary-500 hover:bg-gray-200 transition-all duration-200 rounded-md">
+        <button
+          onClick={editTask}
+          className="text-xl p-2 text-primary-500 hover:bg-gray-200 transition-all duration-200 rounded-md"
+        >
           <svg
             stroke="currentColor"
             fill="currentColor"
